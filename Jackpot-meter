@@ -1,0 +1,56 @@
+name: jackpot_meter_app
+description: A simple jackpot meter viewer app
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/import 'package:flutter/material.dart';
+
+void main() {
+  runApp(JackpotApp());
+}
+
+class JackpotApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Jackpot Meter Viewer',
+      home: JackpotHomePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class JackpotHomePage extends StatelessWidget {
+  final List<Map<String, dynamic>> jackpots = [
+    {'game': 'Dragon Slots', 'jackpot': '\$12,430'},
+    {'game': 'Mega Spin', 'jackpot': '\$8,970'},
+    {'game': 'Lucky Gold', 'jackpot': '\$15,300'},
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Jackpot Meter Viewer')),
+      body: ListView.builder(
+        itemCount: jackpots.length,
+        itemBuilder: (context, index) {
+          final jackpot = jackpots[index];
+          return ListTile(
+            title: Text(jackpot['game']),
+            subtitle: Text('Jackpot: ${jackpot['jackpot']}'),
+          );
+        },
+      ),
+    );
+  }
+}
